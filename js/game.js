@@ -950,7 +950,7 @@ $.setState = function (state) {
 
 		var playButton = new $.Button({
 			x: $.cw / 2 + 1,
-			y: $.ch / 2 - 24,
+			y: $.ch / 2 + 25,
 			lockedWidth: 299,
 			lockedHeight: 49,
 			scale: 3,
@@ -963,31 +963,31 @@ $.setState = function (state) {
 		});
 		$.buttons.push(playButton);
 
-		var statsButton = new $.Button({
-			x: $.cw / 2 + 1,
-			y: playButton.ey + 25,
-			lockedWidth: 299,
-			lockedHeight: 49,
-			scale: 3,
-			title: 'GAME STATS',
-			action: function () {
-				$.setState('stats');
-			}
-		});
-		$.buttons.push(statsButton);
+		// var statsButton = new $.Button({
+		// 	x: $.cw / 2 + 1,
+		// 	y: playButton.ey + 25,
+		// 	lockedWidth: 299,
+		// 	lockedHeight: 49,
+		// 	scale: 3,
+		// 	title: 'GAME STATS',
+		// 	action: function () {
+		// 		$.setState('stats');
+		// 	}
+		// });
+		// $.buttons.push(statsButton);
 
-		var creditsButton = new $.Button({
-			x: $.cw / 2 + 1,
-			y: statsButton.ey + 26,
-			lockedWidth: 299,
-			lockedHeight: 49,
-			scale: 3,
-			title: 'DEVELOPER',
-			action: function () {
-				$.setState('credits');
-			}
-		});
-		$.buttons.push(creditsButton);
+		// var creditsButton = new $.Button({
+		// 	x: $.cw / 2 + 1,
+		// 	y: statsButton.ey + 26,
+		// 	lockedWidth: 299,
+		// 	lockedHeight: 49,
+		// 	scale: 3,
+		// 	title: 'DEVELOPER',
+		// 	action: function () {
+		// 		$.setState('credits');
+		// 	}
+		// });
+		// $.buttons.push(creditsButton);
 	}
 
 	if (state == 'stats') {
@@ -1130,6 +1130,13 @@ $.setState = function (state) {
 		$.storage['powerups'] += $.powerupsCollected;
 		$.storage['time'] += Math.floor($.elapsed);
 		$.updateStorage();
+
+		//sendind score to parent 
+		  // Create an object with the score
+		  var message = { score: $.storage['score'] };
+
+		  // Send the message to the parent window
+		  window.parent.postMessage(message, "*");
 	}
 
 	// set state
@@ -1293,19 +1300,19 @@ $.setupStates = function () {
 		$.ctxmg.fill();
 
 		$.ctxmg.beginPath();
-		var creditValues = $.text({
-			ctx: $.ctxmg,
-			x: $.cw / 2 + 10,
-			y: creditsTitle.ey + 49,
-			text: ' PABITRA BANERJEE\n AUSTINHALLOCK, CHANDLERPRALL\n ASTEROIDS, STAR SHOOTER \n CODEPEN, W3SCHOOL\n W3SCHOOL, CODEPEN\n JAVASCRIPT ANIMATION',
-			hspacing: 1,
-			vspacing: 17,
-			halign: 'left',
-			valign: 'top',
-			scale: 2,
-			snap: 1,
-			render: 1
-		});
+		// var creditValues = $.text({
+		// 	ctx: $.ctxmg,
+		// 	x: $.cw / 2 + 10,
+		// 	y: creditsTitle.ey + 49,
+		// 	text: ' PABITRA BANERJEE\n AUSTINHALLOCK, CHANDLERPRALL\n ASTEROIDS, STAR SHOOTER \n CODEPEN, W3SCHOOL\n W3SCHOOL, CODEPEN\n JAVASCRIPT ANIMATION',
+		// 	hspacing: 1,
+		// 	vspacing: 17,
+		// 	halign: 'left',
+		// 	valign: 'top',
+		// 	scale: 2,
+		// 	snap: 1,
+		// 	render: 1
+		// });
 		$.ctxmg.fillStyle = '#fff';
 		$.ctxmg.fill();
 
